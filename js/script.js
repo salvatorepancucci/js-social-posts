@@ -16,6 +16,9 @@ function renderPosts() {
     posts.forEach(post => {
         const postElement = document.createElement('div');
         postElement.className = 'post';
-
+        postElement.innerHTML = `
+            <p>${post.content}</p>
+            <button class="like-button" data-id="${post.id}">Mi Piace (${post.likes})</button>
+        `;
     });
 }
