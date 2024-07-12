@@ -26,5 +26,12 @@ function renderPosts() {
 
 // Funzione per gestire il click sul pulsante "Mi Piace"
 function handleLike(event) {
-    
+    const button = event.target;
+    const postId = parseInt(button.getAttribute('data-id'));
+    const post = posts.find(p => p.id === postId);
+
+    if (!post) return;
+
+    // Incrementa il contatore dei likes
+    post.likes++;
 }
