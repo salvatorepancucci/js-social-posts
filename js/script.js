@@ -7,3 +7,10 @@ const posts = [
 
 // Array per memorizzare gli id dei post ai quali abbiamo messo il like
 let likedPosts = [];
+
+// Funzione per stampare i post nel feed
+function renderPosts() {
+    const feed = document.getElementById('feed');
+    feed.innerHTML = ""; // Pulisce il feed esistente
+
+}
