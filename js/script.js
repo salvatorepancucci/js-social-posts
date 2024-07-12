@@ -50,3 +50,10 @@ function handleLike(event) {
 
 // Inizializza il feed
 renderPosts();
+
+// Aggiungi l'event listener per il click sui pulsanti "Mi Piace"
+document.getElementById('feed').addEventListener('click', event => {
+    if (event.target.classList.contains('like-button')) {
+        handleLike(event);
+    }
+});
