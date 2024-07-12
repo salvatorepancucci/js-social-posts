@@ -20,5 +20,6 @@ function renderPosts() {
             <p>${post.content}</p>
             <button class="like-button" data-id="${post.id}">Mi Piace (${post.likes})</button>
         `;
+        feed.appendChild(postElement);
     });
 }
