@@ -13,4 +13,9 @@ function renderPosts() {
     const feed = document.getElementById('feed');
     feed.innerHTML = ""; // Pulisce il feed esistente
 
+    posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+
+    });
 }
