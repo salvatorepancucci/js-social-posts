@@ -1,8 +1,8 @@
 // Array di post di esempio
 const posts = [
-    { id: 1, likes: 0, image: "https://picsum.photos/seed/pic1/300/300" },
-    { id: 2, likes: 0, image: "https://picsum.photos/seed/pic2/300/300" },
-    { id: 3, likes: 0, image: "https://picsum.photos/seed/pic3/300/300" }
+    { id: 1, content: "Primo post!", likes: 0, image: "https://picsum.photos/seed/pic1/600/300" },
+    { id: 2, content: "Secondo post!", likes: 0, image: "https://picsum.photos/seed/pic2/600/300" },
+    { id: 3, content: "Terzo post!", likes: 0, image: "https://picsum.photos/seed/pic3/600/300" }
 ];
 
 // Array per memorizzare gli id dei post ai quali abbiamo messo il like
@@ -19,7 +19,8 @@ function renderPosts() {
 
         postElement.innerHTML = `
             <img src="${post.image}" alt="Post image">
-            <button class="like-button ${likedPosts.includes(post.id) ? 'liked' : ''}" data-id="${post.id}">Mi Piace (${post.likes})</button>
+            <p>${post.content}</p>
+            <button class="like-button" data-id="${post.id}">Mi Piace (${post.likes})</button>
         `;
 
         feed.appendChild(postElement);
