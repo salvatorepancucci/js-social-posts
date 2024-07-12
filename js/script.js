@@ -23,3 +23,8 @@ function renderPosts() {
         feed.appendChild(postElement);
     });
 }
+
+// Funzione per gestire il click sul pulsante "Mi Piace"
+function handleLike(event) {
+    
+}
