@@ -34,13 +34,19 @@ function handleLike(event) {
 
     // Incrementa il contatore dei likes
     post.likes++;
+
+    // Cambia colore del bottone se già messo il like
+    if (likedPosts.includes(postId)) {
+        button.classList.remove('liked');
+        likedPosts = likedPosts.filter(id => id !== postId);
+    } else {
+        button.classList.add('liked');
+        likedPosts.push(postId);
+    }
+
+    // Rende di nuovo visibile il post aggiornato
+    renderPosts();
 }
 
-// Cambia colore del bottone se già messo il like
-if (likedPosts.includes(postId)) {
-    button.classList.remove('liked');
-    likedPosts = likedPosts.filter(id => id !== postId);
-} else {
-    button.classList.add('liked');
-    likedPosts.push(postId);
-}
+// Inizializza il feed
+renderPosts();
