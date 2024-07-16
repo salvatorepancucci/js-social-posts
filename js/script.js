@@ -1,61 +1,73 @@
-// Array di post di esempio
+// Array che contiene i dati dei post
 const posts = [
-    { id: 1, likes: 0, image: "https://picsum.photos/seed/pic1/300/300" },
-    { id: 2, likes: 0, image: "https://picsum.photos/seed/pic2/300/300" },
-    { id: 3, likes: 0, image: "https://picsum.photos/seed/pic3/300/300" }
+    {
+        id: 1,
+        author: 'Phil Mangione',
+        date: '4 mesi fa',
+        content: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
+        image: 'https://picsum.photos/600/400?random=1', // URL dell'immagine da Lorem Picsum
+        profilePic: 'https://picsum.photos/40/40?random=1', // URL dell'immagine profilo da Lorem Picsum
+        likes: 80
+    },
+    {
+        id: 2,
+        author: 'Sofia Perlati',
+        date: '2 mesi fa',
+        content: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
+        image: 'https://picsum.photos/600/400?random=2', // URL dell'immagine da Lorem Picsum
+        profilePic: 'https://picsum.photos/40/40?random=2', // URL dell'immagine profilo da Lorem Picsum
+        likes: 60
+    }
 ];
 
-// Array per memorizzare gli id dei post ai quali abbiamo messo il like
+// Array per tenere traccia dei post ai quali abbiamo messo il like
 let likedPosts = [];
 
-// Funzione per stampare i post nel feed
+// Funzione per renderizzare i post
 function renderPosts() {
-    const feed = document.getElementById('feed');
-    feed.innerHTML = ""; // Pulisce il feed esistente
+    const postsContainer = document.getElementById('posts-container');
+    postsContainer.innerHTML = '';
 
     posts.forEach(post => {
         const postElement = document.createElement('div');
-        postElement.className = 'post';
-
+        postElement.classList.add('post');
         postElement.innerHTML = `
-            <img src="${post.image}" alt="Post image">
-            <button class="like-button ${likedPosts.includes(post.id) ? 'liked' : ''}" data-id="${post.id}">Mi Piace (${post.likes})</button>
+            <div class="post-header">
+                <img src="${post.profilePic}" alt="Profile Picture" class="profile-pic">
+                <div>
+                    <h2>${post.author}</h2>
+                    <p>${post.date}</p>
+                </div>
+            </div>
+            <p>${post.content}</p>
+            <img src="${post.image}" alt="Post Image">
+            <div class="post-footer">
+                <span class="like-btn" onclick="toggleLike(${post.id})"><i class="fas fa-thumbs-up"></i> Mi Piace</span>
+                <span>Piace a <span id="like-count-${post.id}">${post.likes}</span> persone</span>
+            </div>
         `;
-
-        feed.appendChild(postElement);
+        postsContainer.appendChild(postElement);
     });
 }
 
-// Funzione per gestire il click sul pulsante "Mi Piace"
-function handleLike(event) {
-    const button = event.target;
-    const postId = parseInt(button.getAttribute('data-id'));
+// Funzione per gestire il click sul bottone "Mi Piace"
+function toggleLike(postId) {
     const post = posts.find(p => p.id === postId);
+    const likeCountElement = document.getElementById(`like-count-${postId}`);
+    const likeBtnElement = document.querySelector(`.like-btn[onclick="toggleLike(${postId})"]`);
 
-    if (!post) return;
-
-    // Incrementa il contatore dei likes
-    post.likes++;
-
-    // Cambia colore del bottone se già messo il like
     if (likedPosts.includes(postId)) {
-        button.classList.remove('liked');
+        post.likes--;
         likedPosts = likedPosts.filter(id => id !== postId);
+        likeBtnElement.classList.remove('liked');
     } else {
-        button.classList.add('liked');
+        post.likes++;
         likedPosts.push(postId);
+        likeBtnElement.classList.add('liked');
     }
 
-    // Rende di nuovo visibile il post aggiornato
-    renderPosts();
+    likeCountElement.innerText = post.likes;
 }
 
-// Inizializza il feed
+// Render iniziale dei post
 renderPosts();
-
-// Aggiungi l'event listener per il click sui pulsanti "Mi Piace"
-document.getElementById('feed').addEventListener('click', event => {
-    if (event.target.classList.contains('like-button')) {
-        handleLike(event);
-    }
-});
