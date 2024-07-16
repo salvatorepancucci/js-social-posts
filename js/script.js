@@ -5,8 +5,8 @@ const posts = [
         author: 'Phil Mangione',
         date: '4 mesi fa',
         content: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
-        image: 'https://picsum.photos/600/400?random=1', // URL dell'immagine da Lorem Picsum
-        profilePic: 'https://picsum.photos/40/40?random=1', // URL dell'immagine profilo da Lorem Picsum
+        image: 'https://picsum.photos/800/600?random=1',
+        profilePic: 'https://picsum.photos/40/40?random=1',
         likes: 80
     },
     {
@@ -14,8 +14,8 @@ const posts = [
         author: 'Sofia Perlati',
         date: '2 mesi fa',
         content: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
-        image: 'https://picsum.photos/600/400?random=2', // URL dell'immagine da Lorem Picsum
-        profilePic: 'https://picsum.photos/40/40?random=2', // URL dell'immagine profilo da Lorem Picsum
+        image: 'https://picsum.photos/800/600?random=2',
+        profilePic: 'https://picsum.photos/40/40?random=2',
         likes: 60
     }
 ];
@@ -42,8 +42,10 @@ function renderPosts() {
             <p>${post.content}</p>
             <img src="${post.image}" alt="Post Image">
             <div class="post-footer">
-                <span class="like-btn" onclick="toggleLike(${post.id})"><i class="fas fa-thumbs-up"></i> Mi Piace</span>
-                <span>Piace a <span id="like-count-${post.id}">${post.likes}</span> persone</span>
+                <span class="like-btn" onclick="toggleLike(${post.id})">
+                    <i class="fas fa-thumbs-up"></i> Mi Piace
+                </span>
+                <span style="margin-left: 10px;">Piace a <span id="like-count-${post.id}">${post.likes}</span> persone</span>
             </div>
         `;
         postsContainer.appendChild(postElement);
